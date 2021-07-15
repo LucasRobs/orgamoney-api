@@ -1,10 +1,10 @@
 {
   "type": "postgres",
   "host": "localhost",
-  "port": 5433,
+  "port": 5432,
   "username": "postgres",
-  "password": "docker",
-  "database": "mussum",
+  "password": "postgres",
+  "database": "orgamoney",
   "entities": [
     "src/models/**/*.ts"
  ],
