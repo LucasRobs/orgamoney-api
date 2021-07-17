@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import Year from './Year';
 
 @Entity()
 export default class User {
@@ -25,4 +26,6 @@ export default class User {
 
   @UpdateDateColumn()
   updateAt: Date;
+
+  years: Year;
 }
