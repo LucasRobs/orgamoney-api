@@ -1,11 +1,14 @@
 import {
   Column,
   CreateDateColumn,
-  Double,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import Category from './Category';
+import Month from './Month';
 
 @Entity()
 export default class Bill {
@@ -21,5 +24,11 @@ export default class Bill {
   @CreateDateColumn()
   date: Date;
 
+  @ManyToOne(() => Month, month => month.bills)
+  @JoinColumn()
+  month: Month;
+
+  @OneToOne(() => Category, { lazy: true, cascade: true })
+  @JoinColumn()
   category: Category;
 }

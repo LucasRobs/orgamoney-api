@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
 import Year from './Year';
 
 @Entity()
@@ -21,11 +24,19 @@ export default class User {
   @Column()
   password: string;
 
+  @OneToMany(() => Year, year => year.user, { lazy: true, cascade: true })
+  @JoinColumn()
+  years: Year[];
+
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
   updateAt: Date;
 
-  years: Year;
+  constructor(nome: string, login: string, password: string) {
+    this.name = nome;
+    this.login = login;
+    this.password = password;
+  }
 }
