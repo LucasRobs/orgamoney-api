@@ -21,7 +21,7 @@ export default class Year {
   @JoinColumn()
   user: User;
 
-  @OneToMany(() => Month, month => month.year, { lazy: true, cascade: true })
+  @OneToMany(() => Month, month => month.year, { eager: true, cascade: true })
   @JoinColumn()
   months: Month[];
 

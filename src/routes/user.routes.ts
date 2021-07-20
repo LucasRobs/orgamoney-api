@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 import Month from '../models/Month';
@@ -8,7 +9,7 @@ async function createMonth(): Promise<Month[]> {
   const repositoryMonth = getRepository(Month);
   const months = [
     new Month('Janeiro'),
-    new Month('Feveiro'),
+    new Month('Fevereiro'),
     new Month('Março'),
     new Month('Abril'),
     new Month('Maio'),
@@ -58,9 +59,7 @@ userRouter.post('/', async (request, response) => {
     const { body } = request;
     const user = new User(body.name, body.login, body.password);
     user.years = [year];
-
     const res = await repositoryUser.save(user);
-    console.log(year);
 
     return response.status(201).send(res);
   } catch (err) {
@@ -68,7 +67,7 @@ userRouter.post('/', async (request, response) => {
       case 'UQ_a62473490b3e4578fd683235c5e':
         return response.status(401).send('Esse login ja esta em uso!');
       default:
-        console.log(err.message);
+        return response.status(400).send(err.message);
     }
   }
 });

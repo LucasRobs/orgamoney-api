@@ -23,13 +23,13 @@ export default class Month {
   year: Year;
 
   @OneToMany(() => Income, income => income.month, {
-    lazy: true,
+    eager: true,
     cascade: true,
   })
   @JoinColumn()
   incomes: Income[];
 
-  @OneToMany(() => Bill, bill => bill.month, { lazy: true, cascade: true })
+  @OneToMany(() => Bill, bill => bill.month, { eager: true, cascade: true })
   @JoinColumn()
   bills: Bill[];
 

@@ -28,7 +28,7 @@ export default class Income {
   @JoinColumn()
   month: Month;
 
-  @OneToOne(() => Category, { lazy: true, cascade: true })
+  @OneToOne(() => Category, { eager: true, cascade: true })
   @JoinColumn()
   category: Category;
 }

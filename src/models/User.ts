@@ -24,7 +24,7 @@ export default class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Year, year => year.user, { lazy: true, cascade: true })
+  @OneToMany(() => Year, year => year.user, { eager: true, cascade: true })
   @JoinColumn()
   years: Year[];
 
