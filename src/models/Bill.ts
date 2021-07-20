@@ -28,7 +28,7 @@ export default class Bill {
   @JoinColumn()
   month: Month;
 
-  @OneToOne(() => Category, { eager: true, cascade: true })
+  @ManyToOne(() => Category, { eager: true, cascade: true })
   @JoinColumn()
   category: Category;
 }

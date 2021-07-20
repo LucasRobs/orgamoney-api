@@ -8,7 +8,10 @@ import User from '../models/User';
 
 const userRouter = Router();
 
-async function getMonth(userId, nameMonth) {
+async function getMonth(
+  userId: string,
+  nameMonth: string,
+): Promise<Month | null> {
   try {
     const repositoryUser = getRepository(User);
     const user = await repositoryUser.findOne({

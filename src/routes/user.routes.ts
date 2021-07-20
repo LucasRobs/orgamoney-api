@@ -51,7 +51,7 @@ userRouter.post('/', async (request, response) => {
     const repositoryYear = getRepository(Year);
     const repositoryUser = getRepository(User);
 
-    const year = new Year(2020);
+    const year = new Year(2021);
     await repositoryYear.save(year);
 
     year.months = await createMonth();

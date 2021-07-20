@@ -4,7 +4,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import Category from './Category';
@@ -28,7 +27,7 @@ export default class Income {
   @JoinColumn()
   month: Month;
 
-  @OneToOne(() => Category, { eager: true, cascade: true })
+  @ManyToOne(() => Category, { eager: true })
   @JoinColumn()
   category: Category;
 }
