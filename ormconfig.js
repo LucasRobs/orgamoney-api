@@ -1,7 +1,7 @@
 console.log(process.env.DATABASE_URL);
 module.exports = {
   type: 'postgres',
-  url: HEROKU_POSTGRESQL_GOLD_URL,
+  url: process.env.DATABASE_URL,
   entities: ['dist/models/**/*.js'],
   migrations: ['dist/migrations/**/*.js'],
   cli: {
