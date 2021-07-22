@@ -9,6 +9,7 @@ import {
 } from 'typeorm';
 
 import Year from './Year';
+import Category from './Category';
 
 @Entity()
 export default class User {
@@ -23,6 +24,12 @@ export default class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Category, category => category.user, {
+    eager: true,
+    cascade: true,
+  })
+  categories: Category[];
 
   @OneToMany(() => Year, year => year.user, { eager: true, cascade: true })
   @JoinColumn()

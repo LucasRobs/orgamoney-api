@@ -7,9 +7,10 @@ const userRouter = Router();
 
 userRouter.get('/', async (request, response) => {
   try {
+    const Authorization = request.headers.authorization;
     const repositoryUser = getRepository(User);
     const user = await repositoryUser.findOne({
-      where: { id: request.body.userId },
+      where: { id: Authorization },
     });
     if (user) return response.status(200).json(user.years);
     return response

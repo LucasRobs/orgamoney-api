@@ -7,9 +7,10 @@ const userRouter = Router();
 
 userRouter.get('/', async (request, response) => {
   try {
+    const Authorization = request.headers.authorization;
     const repositoryUser = getRepository(User);
     const user = await repositoryUser.findOne({
-      where: { id: request.body.userId },
+      where: { id: Authorization },
     });
     if (user) {
       user.years[0].months.forEach(month => {
@@ -18,9 +19,7 @@ userRouter.get('/', async (request, response) => {
       });
       return response.status(404).send('Mês não encontrado.');
     }
-    return response
-      .status(401)
-      .send('Problema interno, contate um administrador.');
+    return response.status(401).send('Falha de Autenticação.');
   } catch (err) {
     return response.status(400).send(err.message);
   }
