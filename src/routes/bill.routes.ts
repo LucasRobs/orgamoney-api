@@ -94,13 +94,13 @@ userRouter.post('/', async (request, response) => {
 
 userRouter.delete('/', async (request, response) => {
   try {
-    const { idMonth, idBill } = request.body;
+    const { nameMonth, idBill } = request.query;
     const Authorization = request.headers.authorization;
-    const month = await getMonth(Authorization, idMonth);
+    const month = await getMonth(Authorization, String(nameMonth));
     if (month) {
       const repositoryBill = getRepository(Bill);
       const bill = month.bills.find((billl): Bill | undefined => {
-        if (billl.id === idBill) return billl;
+        if (billl.id === String(idBill)) return billl;
       });
 
       if (bill) {
@@ -120,7 +120,7 @@ userRouter.delete('/', async (request, response) => {
   }
 });
 
-userRouter.patch('/', async (request, response) => {
+userRouter.put('/', async (request, response) => {
   try {
     const { name, value, date, idBill, idMonth, idCategory } = request.body;
     const Authorization = request.headers.authorization;

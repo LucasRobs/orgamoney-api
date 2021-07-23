@@ -11,7 +11,7 @@ const userRouter = Router();
 
 async function getMonth(
   userId: string | undefined,
-  nameMonth: string,
+  nameMonth: string | undefined,
 ): Promise<Month | null> {
   try {
     const repositoryUser = getRepository(User);
@@ -94,13 +94,13 @@ userRouter.post('/', async (request, response) => {
 
 userRouter.delete('/', async (request, response) => {
   try {
-    const { idMonth, idIncome } = request.body;
+    const { nameMonth, idIncome } = request.query;
     const Authorization = request.headers.authorization;
-    const month = await getMonth(Authorization, idMonth);
+    const month = await getMonth(Authorization, String(nameMonth));
     if (month) {
       const repositoryIncome = getRepository(Income);
       const income = month.incomes.find((incomee): Income | undefined => {
-        if (incomee.id === idIncome) return incomee;
+        if (incomee.id === String(idIncome)) return incomee;
       });
 
       if (income) {
@@ -120,7 +120,7 @@ userRouter.delete('/', async (request, response) => {
   }
 });
 
-userRouter.patch('/', async (request, response) => {
+userRouter.put('/', async (request, response) => {
   try {
     const { name, value, date, idIncome, idMonth, idCategory } = request.body;
     const Authorization = request.headers.authorization;
