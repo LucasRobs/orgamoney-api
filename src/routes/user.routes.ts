@@ -31,6 +31,22 @@ async function createMonth(): Promise<Month[]> {
 
 const userRouter = Router();
 
+userRouter.get('/user', async (request, response) => {
+  try {
+    const Authorization = request.headers.authorization;
+    const repository = getRepository(User);
+    const user = await repository.findOne({
+      where: { id: Authorization },
+    });
+    if (user) {
+      return response.status(200).json(user);
+    }
+    return response.status(401).send('Falha de autenticação!');
+  } catch (err) {
+    return response.status(400).send(err.message);
+  }
+});
+
 userRouter.post('/session', async (request, response) => {
   try {
     const repository = getRepository(User);
