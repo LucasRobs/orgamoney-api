@@ -15,7 +15,7 @@ userRouter.get('/', async (request, response) => {
     });
     if (user) {
       user.years[0].months.forEach(_month => {
-        if (month === _month.name) return response.status(200).json(month);
+        if (month === _month.name) return response.status(200).json(_month);
       });
       return response.status(404).send('Mês não encontrado.');
     }
