@@ -8,14 +8,14 @@ const userRouter = Router();
 userRouter.get('/', async (request, response) => {
   try {
     const Authorization = request.headers.authorization;
+    const { month } = request.query;
     const repositoryUser = getRepository(User);
     const user = await repositoryUser.findOne({
       where: { id: Authorization },
     });
     if (user) {
-      user.years[0].months.forEach(month => {
-        if (request.body.month === month.name)
-          return response.status(200).json(month);
+      user.years[0].months.forEach(_month => {
+        if (month === _month.name) return response.status(200).json(month);
       });
       return response.status(404).send('Mês não encontrado.');
     }
