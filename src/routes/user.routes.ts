@@ -31,12 +31,12 @@ async function createMonth(): Promise<Month[]> {
 
 const userRouter = Router();
 
-userRouter.get('/user', async (request, response) => {
+userRouter.get('/', async (request, response) => {
   try {
     const Authorization = request.headers.authorization;
     const repository = getRepository(User);
     const user = await repository.findOne({
-      where: { id: Authorization },
+      where: { id: String(Authorization) },
     });
     if (user) {
       return response.status(200).json(user);
@@ -68,6 +68,7 @@ userRouter.post('/', async (request, response) => {
     const repositoryUser = getRepository(User);
 
     const year = new Year(2021);
+
     await repositoryYear.save(year);
 
     year.months = await createMonth();
