@@ -16,10 +16,10 @@ async function createMonth(): Promise<Month[]> {
     new Month('Junho'),
     new Month('Julho'),
     new Month('Agosto'),
-    new Month('Setenbro'),
+    new Month('Setembro'),
     new Month('Outubro'),
-    new Month('Novenbro'),
-    new Month('Dezenbro'),
+    new Month('Novembro'),
+    new Month('Dezembro'),
   ];
 
   months.forEach(async month => {

@@ -14,7 +14,6 @@ userRouter.get('/', async (request, response) => {
       where: { id: Authorization },
     });
     if (user) {
-      console.log(month);
       user.years[0].months.forEach(_month => {
         if (String(month) === _month.name)
           return response.status(200).json(_month);
