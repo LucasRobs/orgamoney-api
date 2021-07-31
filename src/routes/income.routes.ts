@@ -45,7 +45,7 @@ async function getCategory(
     if (user) {
       user.categories.forEach(category => {
         if (nameCategory === category.name) {
-          res = category;
+          res = category as Category;
         }
       });
     }

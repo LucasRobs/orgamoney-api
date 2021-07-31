@@ -84,9 +84,9 @@ userRouter.post('/', async (request, response) => {
       await repositoryMonth.save(month);
       return response.status(200).json(bill);
     }
+    if (!month) return response.status(404).send('mês não encontrado.');
     if (!category)
       return response.status(404).send('categoria não encontrada.');
-    if (!month) return response.status(404).send('mês não encontrado.');
   } catch (err) {
     return response.status(400).send(err.message);
   }
@@ -131,7 +131,6 @@ userRouter.put('/', async (request, response) => {
       const bill = month.bills.find((billl): Bill | undefined => {
         if (billl.id === idBill) return billl;
       });
-
       if (bill && category) {
         bill.name = name;
         bill.value = value;
