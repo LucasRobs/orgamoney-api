@@ -102,7 +102,6 @@ userRouter.delete('/', async (request, response) => {
       const bill = month.bills.find((billl): Bill | undefined => {
         if (billl.id === String(idBill)) return billl;
       });
-
       if (bill) {
         await repositoryBill.delete(bill);
         const repositoryMonth = getRepository(Month);
