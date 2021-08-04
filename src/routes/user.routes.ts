@@ -35,6 +35,7 @@ userRouter.get('/', async (request, response) => {
   try {
     const Authorization = request.headers.authorization;
     const repository = getRepository(User);
+
     const user = await repository.findOne({
       where: { id: String(Authorization) },
     });
